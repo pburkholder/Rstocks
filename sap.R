@@ -26,9 +26,14 @@ growth_over <- function(x, start=1916, skip=17) {
     x
 }
 
+gen_arrs <- function(x = sap,start=1916,step=16) {
+    end <- start+ dim(x)[1] - step - 1
+    
+    result <- lapply(start:end, function(y) {
+      growth_over(x, y, step)
+      }
+    )
+    arrs <- simplify2array(result)[4,]
+}
 
-result <- lapply(1916:1999, function(x) {
-    growth_over(sap, x, 16)
-})
-
-arrs <- simplify2array(result)[4,]
+print(summary(arrs))
